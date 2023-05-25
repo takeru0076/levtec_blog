@@ -32,5 +32,24 @@ public function store(PostRequest $request, Post $post)
     return redirect('/posts/' . $post->id);
 }
 
+public function edit(Post $post)
+{
+    return view('posts/edit')->with(['post' => $post]);
+}
+
+public function update(PostRequest $request, Post $post)
+{
+    $input_post = $request['post'];
+    $post->fill($input_post)->save();
+
+    return redirect('/posts/' . $post->id);
+}
+
+public function delete(Post $post)
+{
+    $post->delete();
+    return redirect('/');
+}
+
 }
 ?>
